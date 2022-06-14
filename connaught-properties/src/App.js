@@ -16,6 +16,7 @@ function App() {
   return (
     <>
       <Router>
+        {/* Any routes you want to make private; wrap with PrivateRoute */}
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/offers" element={<Offers />} />
