@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
@@ -34,7 +35,7 @@ function SignUp() {
     // Update the formData state
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      [e.target.id]: e.target.value,
     }));
     // console.log(formData);
   };
@@ -51,12 +52,21 @@ function SignUp() {
       );
       // Get user info
       const user = userCredential.user;
+
       updateProfile(auth.currentUser, {
-        // update displayName
         displayName: name,
       });
+      // Copy Form Data State to new object (don't want to change the form data state)
+      const formDataCopy = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp(); // Add timestamp on add to server
+
+      //   Return promise
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+      //   console.table = formDataCopy;
       // redirect user
       navigate("/");
+      console.log("User registered successfully");
     } catch (error) {
       console.log(error);
     }
