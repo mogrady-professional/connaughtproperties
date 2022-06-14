@@ -1,3 +1,5 @@
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -68,7 +70,8 @@ function SignUp() {
       navigate("/");
       console.log("User registered successfully");
     } catch (error) {
-      console.log(error);
+      //   console.log(error);
+      toast.error("Something went wrong with registration");
     }
   };
 
