@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
-
 import React from "react";
+import OAuth from "../components/OAuth";
 
 function SignIn() {
   // Component Level State
@@ -48,6 +48,8 @@ function SignIn() {
       if (userCredential.user) {
         navigate("/");
         console.log("User logged in successfully");
+        toast.success(`Welcome ${userCredential.user.displayName}`);
+        // console.log(userCredential.user.displayName);
       }
     } catch (error) {
       //   console.log(error);
@@ -104,7 +106,7 @@ function SignIn() {
               </button>
             </div>
           </form>
-          {/* Google OAuth Component */}
+          <OAuth />
           <Link to="/sign-up" className="registerLink">
             Sign Up Instead
           </Link>

@@ -23,6 +23,7 @@ function Profile() {
   // Log out from Firebase
   const onLogout = () => {
     auth.signOut();
+    toast.success(`Logged out successfully ${auth.currentUser.displayName}`);
     navigate("/");
   };
   // Update
