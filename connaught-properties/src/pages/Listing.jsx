@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { getDoc, doc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
@@ -9,7 +10,7 @@ import shareIcon from "../assets/svg/shareIcon.svg";
 
 function Listing() {
   const [listing, setListing] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
 
   const navigate = useNavigate();
@@ -42,17 +43,18 @@ function Listing() {
       <div
         className="shareIconDiv"
         onClick={() => {
-          navigator.clipboard.writeText(window.URL.href);
+          navigator.clipboard.writeText(window.location.href);
           setShareLinkCopied(true);
           setTimeout(() => {
             setShareLinkCopied(false);
-            alert(window.URL.href);
           }, 2000);
         }}
       >
         <img src={shareIcon} alt="Share" />
       </div>
+
       {shareLinkCopied && <p className="linkCopied">Link Copied!</p>}
+
       <div className="listingDetails">
         <p className="listingName">
           {listing.name} - €
@@ -92,7 +94,7 @@ function Listing() {
         <p className="listingLocationTitle">Location</p>
 
         <div className="leafletContainer">
-          {/* <MapContainer
+          <MapContainer
             style={{ height: "100%", width: "100%" }}
             center={[listing.geolocation.lat, listing.geolocation.lng]}
             zoom={13}
@@ -108,7 +110,7 @@ function Listing() {
             >
               <Popup>{listing.location}</Popup>
             </Marker>
-          </MapContainer> */}
+          </MapContainer>
         </div>
 
         <Link
