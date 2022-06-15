@@ -3,9 +3,10 @@ import { useState, useEffect, useRef } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import { toast } from "react-toastify";
 
 function CreateListing() {
-  const [geolocationEnabled, setGeolocationEnabled] = useState(true);
+  const [geolocationEnabled, setGeolocationEnabled] = useState(false);
   // Set loading as piece of state
   const [loading, setLoading] = useState(false);
 
@@ -60,9 +61,57 @@ function CreateListing() {
     return unsubscribe;
   }, [auth, navigate]);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    setLoading(true);
+    // Check to see if discounted price is greater than regular price
+    if (discountedPrice >= regularPrice) {
+      setLoading(false);
+      document.getElementById("discountedPrice").style.border = "1px solid red";
+      toast.error("Discounted price must be less than regular price");
+      return;
+    }
+
+    // Prevent uploading 6 or more images
+    if (images.length > 6) {
+      setLoading(false);
+      toast.error("You can only upload a maximum of 6 images");
+      return;
+    }
+
+    // Google : Geocoding
+    let geolocation = [];
+
+    let location;
+
+    if (geolocationEnabled) {
+      // Make request to google
+      const response = await fetch(`
+      https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDcNKl_yJ-OcT9hymgTlOjMoX415zN8cIM`);
+      const data = await response.json();
+      console.log(data);
+
+      geolocation.lat = data.results[0]?.geometry.location.lat ?? 0;
+      geolocation.lng = data.results[0]?.geometry.location.lng ?? 0;
+      location =
+        data.status === "ZERO_RESULTS"
+          ? undefined
+          : data.results[0]?.formatted_address;
+
+      if (location === undefined || location.includes("undefined")) {
+        setLoading(false);
+        toast.error("Please enter a valid address");
+        return;
+      }
+    } else {
+      geolocation.lat = latitude;
+      geolocation.lng = longitude;
+      location = address;
+      console.log(geolocation, location);
+    }
+    setLoading(false);
+
+    // console.log(formData);
   };
 
   // Input Change Handler
@@ -71,11 +120,11 @@ function CreateListing() {
     // Check to see if file upload
     let boolean = null;
 
-    if (e.target.value == "true") {
+    if (e.target.value === "true") {
       boolean = true;
     }
 
-    if (e.target.value == "false") {
+    if (e.target.value === "false") {
       boolean = false;
     }
     //  Files
