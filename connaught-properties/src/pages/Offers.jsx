@@ -20,16 +20,18 @@ function Offers() {
   // Set component level state
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  // eslint-disable-next-line no-unused-vars
   const params = useParams();
   //   console.log(params);
 
   useEffect(() => {
     const fetchListings = async () => {
+      // eslint-disable-next-line no-unused-vars
       const listings = collection(db, "listings");
 
       try {
         // Get reference
+        // eslint-disable-next-line no-unused-vars
         const listingsRef = collection(db, "listings");
 
         // Query -> look in the url
@@ -55,7 +57,7 @@ function Offers() {
             data: doc.data(),
           });
         });
-
+        console.log(result);
         setListings(listings);
         setLoading(false);
       } catch (error) {
