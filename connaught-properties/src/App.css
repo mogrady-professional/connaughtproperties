@@ -839,3 +839,11 @@ button {
     font-size: 0.8rem;
     opacity: 0.75;
 }
+
+
+/* Slider Custom CSS */
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: #ffff;
+}
