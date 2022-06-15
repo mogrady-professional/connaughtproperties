@@ -6,8 +6,8 @@ import { db } from "../firebase.config";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { arrowRight } from "..assets/svg/keyboardArrowRightIcon.svg";
-import { homeIcon } from "..assets/svg/homeIcon.svg";
+import arrowRight from "../assets/svg/keyboardArrowRightIcon.svg";
+import homeIcon from "../assets/svg/homeIcon.svg";
 
 function Profile() {
   const auth = getAuth(); // Get the auth object
