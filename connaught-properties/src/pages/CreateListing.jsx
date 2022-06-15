@@ -10,6 +10,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { v4 as uuidv4 } from "uuid";
 
@@ -105,7 +106,7 @@ function CreateListing() {
         data.status === "ZERO_RESULTS"
           ? undefined
           : data.results[0]?.formatted_address;
-
+      console.log("Google geocode", location, geolocation);
       if (location === undefined || location.includes("undefined")) {
         setLoading(false);
         toast.error("Please enter a valid address");
@@ -114,8 +115,9 @@ function CreateListing() {
     } else {
       geolocation.lat = latitude;
       geolocation.lng = longitude;
-      location = address;
-      // console.log(geolocation, location);
+      // location = address;
+
+      console.log(geolocation, location);
     }
 
     // Store image in firebase through a loop
@@ -155,6 +157,7 @@ function CreateListing() {
           (error) => {
             // Handle unsuccessful uploads
             reject(error);
+            console.log("Error uploading image");
           },
           () => {
             // Handle successful uploads on complete
@@ -177,6 +180,29 @@ function CreateListing() {
       return;
     });
     console.log(imgUrls);
+
+    const formDataCopy = {
+      ...formData,
+      imgUrls,
+      geolocation,
+      timestamp: serverTimestamp(),
+    };
+    delete formDataCopy.images;
+    delete formDataCopy.address;
+    // Set location
+    // location && (formDataCopy.location = location);
+    /*
+    Location Fix for Partially Retrieved Addresses
+    */
+    formDataCopy.location = address;
+
+    // No offer; delete offer from form
+    !formDataCopy.offer && delete formDataCopy.discountedPrice;
+    // Save to database
+    const docRef = await addDoc(collection(db, "listings"), formDataCopy);
+    toast.success("Listing created successfully");
+    // Navigate to new listing
+    navigate(`/category/${formDataCopy.type}/${docRef.id}`);
     setLoading(false);
 
     // console.log(formData);
@@ -335,7 +361,7 @@ function CreateListing() {
             </button>
           </div>
 
-          <label className="formLabel">Address</label>
+          <label className="formLabel">Eircode/Full Address</label>
           <textarea
             className="formInputAddress"
             type="text"
