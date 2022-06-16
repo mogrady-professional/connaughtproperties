@@ -76,8 +76,9 @@ button {
 .removeIcon {
     cursor: pointer;
     position: absolute;
-    top: -3%;
+    top: 45%;
     right: -2%;
+    margin-right: 1.5rem;
 }
 
 .editIcon {
@@ -648,7 +649,7 @@ button {
 .profileDetailsHeader {
     display: flex;
     justify-content: space-between;
-    max-width: 500px;
+    /* max-width: 500px; */
 }
 
 .personalDetailsText {
@@ -666,7 +667,7 @@ button {
     border-radius: 1rem;
     padding: 1rem;
     box-shadow: rgba(0, 0, 0, 0.2);
-    max-width: 500px;
+    /* max-width: 500px; */
 }
 
 .profileDetails {
@@ -712,7 +713,7 @@ button {
     box-shadow: rgba(0, 0, 0, 0.2);
     margin-top: 2rem;
     font-weight: 600;
-    max-width: 500px;
+    /* max-width: 500px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -731,10 +732,13 @@ button {
     font-weight: 600;
     margin-top: 1rem;
     display: block;
+    text-align: center;
 }
 
 .formButtons {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .formButton,
@@ -783,19 +787,20 @@ button {
 
 .formInputName {
     padding: 0.9rem 1rem;
-    width: 90%;
-    max-width: 326px;
+    width: 100%;
+    /* max-width: 326px; */
 }
 
 .formInputAddress {
     padding: 0.9rem 1rem;
-    width: 90%;
-    max-width: 326px;
+    width: 100%;
+    /* max-width: 326px; */
 }
 
 .formPriceDiv {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .formPriceText {
@@ -806,6 +811,7 @@ button {
 .imagesInfo {
     font-size: 0.9rem;
     opacity: 0.75;
+    text-align: center;
 }
 
 .formInputFile {
@@ -846,4 +852,26 @@ button {
 .swiper-button-prev,
 .swiper-button-next {
     color: #ffff;
+}
+
+
+/* Custom Delete */
+
+@media only screen and (max-width: 600px) {
+    .removeIcon {
+        margin-right: 0;
+    }
+}
+
+.listingsList {
+    margin-inline-start: -40px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.formRooms {
+    align-items: center;
+    justify-content: center;
 }

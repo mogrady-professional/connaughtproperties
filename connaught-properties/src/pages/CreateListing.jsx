@@ -244,7 +244,7 @@ function CreateListing() {
   return (
     <div className="profile">
       <header>
-        <p className="pageHeader">Create a Listing</p>
+        <p className="pageHeader text-center">Create a Listing</p>
       </header>
       <main>
         <form onSubmit={onSubmit}>
@@ -271,8 +271,8 @@ function CreateListing() {
           </div>
 
           <label className="formLabel">Name</label>
-          <input
-            className="formInputName"
+          <textarea
+            className="formInputName text-center"
             type="text"
             id="name"
             value={name}
