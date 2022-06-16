@@ -1,5 +1,9 @@
 # Connaught Properties
 
+<p align="center">
+<img src="images/deploy.png"  height="auto" width="100%"> 
+</p>
+
 # Table of Contents
 
 - [Connaught Properties](#connaught-properties)
@@ -11,6 +15,7 @@
   - [Packages Used](#packages-used)
   - [Config File for Google Firebase](#config-file-for-google-firebase)
 - [Firebase Setup For House Marketplace](#firebase-setup-for-house-marketplace)
+- [Production Vercel Deployment Notes](#production-vercel-deployment-notes)
   - [CEL — Common Expression Language](#cel--common-expression-language)
     - [Cloud Firestore](#cloud-firestore)
     - [Storage Rules](#storage-rules)
@@ -18,9 +23,9 @@
 
 # Project Overview
 
-- Ensure the rules regarding google geolocation is only set to the url on production!
 - [x] React Router DOM V6
 - [x] Firebase 9
+- [x] Project Hosted on Vercel
 - The way that Firebase stores your authentication in the browser is through IndexedDB.
   - Go to application, it's not going to be in regular local storage. Around version 5 of Firebase they moved it to IndexedDB. Look for IndexedDB, you'll see Firebase local storage. What's great about Firebase is you don't have to worry about every refresh like you would if you are implementing a custom backend with with JSON Web tokens.
 
@@ -39,6 +44,7 @@
 - [x] [React Leaflet](https://react-leaflet.js.org/docs/api-map/) added for maps functionality
 - [x] [React Swiper](https://swiperjs.com/react) added for image swiping functionality
   - [x] Pagination used to call 10 advertisements instead of auto loading all listings
+- [x] Deployed on Vercel
 
 ## Getting Started Commands
 
@@ -72,6 +78,13 @@
 9. Enable storage
 10. Add rules for storage (see Rule b below)
 11. Create 3 composite indexes for advanced querying
+
+# Production Vercel Deployment Notes
+
+- Connect project to GitHub repo
+- Provide ENV Variable(s)
+- Google OAuth — Published Domain URL must be added to OAuth Redirect domains in firebase console/authentication/sign in method/ Authorized domains
+- Geocoding API — Add Application Restrictions (Restrict key usage requests to the specified website)
 
 ## CEL — Common Expression Language
 
