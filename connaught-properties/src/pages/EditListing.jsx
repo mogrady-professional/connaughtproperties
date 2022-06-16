@@ -15,6 +15,7 @@ import { db } from "../firebase.config";
 import { v4 as uuidv4 } from "uuid";
 
 function EditListing() {
+  // eslint-disable-next-line no-unused-vars
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   // Set loading as piece of state
   const [loading, setLoading] = useState(false);
@@ -58,6 +59,7 @@ function EditListing() {
   const auth = getAuth();
   const navigate = useNavigate();
   const params = useParams();
+  // eslint-disable-next-line no-unused-vars
   const isMounted = useRef(true);
 
   // Redirect if listing is not user's
@@ -104,6 +106,7 @@ function EditListing() {
     });
 
     return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth, navigate]);
 
   const onSubmit = async (e) => {
@@ -186,6 +189,8 @@ function EditListing() {
                 break;
               case "running":
                 console.log("Upload is running");
+                break;
+              default:
                 break;
             }
           },

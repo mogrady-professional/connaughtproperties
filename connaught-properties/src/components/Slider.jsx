@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../firebase.config";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Navigation, Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -18,9 +18,9 @@ function Slider() {
 
   const navigate = useNavigate();
   const location = useLocation();
-
+  // eslint-disable-next-line no-unused-vars
   const pathMatchRoute = (route) => {
-    if (route == location.pathname) {
+    if (route === location.pathname) {
       console.log(route);
       return true;
     }

@@ -28,6 +28,7 @@ function Category() {
   // Initial fetch of listings
   useEffect(() => {
     const fetchListings = async () => {
+      // eslint-disable-next-line no-unused-vars
       const listings = collection(db, "listings");
 
       try {
@@ -53,6 +54,7 @@ function Category() {
         let listings = [];
 
         // Loop through the querySnap
+        // eslint-disable-next-line no-unused-vars
         const result = querySnap.forEach((doc) => {
           // console.log(doc.data());
           // Add to listings array
@@ -74,6 +76,7 @@ function Category() {
 
   // Pagination / Load more listings
   const onFetchMoreListings = async () => {
+    // eslint-disable-next-line no-unused-vars
     const listings = collection(db, "listings");
 
     try {
@@ -99,6 +102,7 @@ function Category() {
       let listings = [];
 
       // Loop through the querySnap
+      // eslint-disable-next-line no-unused-vars
       const result = querySnap.forEach((doc) => {
         // console.log(doc.data());
         // Add to listings array

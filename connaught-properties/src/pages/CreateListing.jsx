@@ -15,6 +15,7 @@ import { db } from "../firebase.config";
 import { v4 as uuidv4 } from "uuid";
 
 function CreateListing() {
+  // eslint-disable-next-line no-unused-vars
   const [geolocationEnabled, setGeolocationEnabled] = useState(true);
   // Set loading as piece of state
   const [loading, setLoading] = useState(false);
@@ -69,6 +70,7 @@ function CreateListing() {
     });
 
     return unsubscribe;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth, navigate]);
 
   const onSubmit = async (e) => {

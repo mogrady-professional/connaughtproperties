@@ -24,6 +24,7 @@ function Listing() {
 
   const navigate = useNavigate();
   const params = useParams();
+  // eslint-disable-next-line no-unused-vars
   const auth = getAuth();
   //   console.log(params);
 
