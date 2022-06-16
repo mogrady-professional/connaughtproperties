@@ -14,6 +14,8 @@ import { getAuth } from "firebase/auth";
 import { db } from "../firebase.config";
 import Spinner from "../components/Spinner";
 import shareIcon from "../assets/svg/shareIcon.svg";
+import bedIcon from "../assets/svg/bedIcon.svg";
+import bathtubIcon from "../assets/svg/bathtubIcon.svg";
 
 function Listing() {
   const [listing, setListing] = useState(null);
@@ -106,13 +108,15 @@ function Listing() {
 
         <ul className="listingDetailsList">
           <li>
+            <img src={bedIcon} alt="Bedrooms" style={{ width: "15px" }} />
             {listing.bedrooms > 1
-              ? `${listing.bedrooms} Bedrooms`
+              ? ` ${listing.bedrooms} Bedrooms`
               : "1 Bedroom"}
           </li>
           <li>
+            <img src={bathtubIcon} alt="Bathrooms" style={{ width: "15px" }} />
             {listing.bathrooms > 1
-              ? `${listing.bathrooms} Bathrooms`
+              ? ` ${listing.bathrooms} Bathrooms`
               : "1 Bathroom"}
           </li>
           <li>{listing.parking && "Parking Spot"}</li>

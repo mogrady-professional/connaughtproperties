@@ -10,7 +10,6 @@ import {
   where,
   orderBy,
   deleteDoc,
-  documentId,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 import React from "react";

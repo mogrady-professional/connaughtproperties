@@ -52,6 +52,7 @@ function Offers() {
         setLastFetchedListing(lastVisible); // Set last doc
 
         // Loop through the querySnap
+        // eslint-disable-next-line no-unused-vars
         const result = querySnap.forEach((doc) => {
           // console.log(doc.data());
           // Add to listings array
@@ -73,6 +74,7 @@ function Offers() {
 
   // Pagination / Load more listings
   const onFetchMoreListings = async () => {
+    // eslint-disable-next-line no-unused-vars
     const listings = collection(db, "listings");
 
     try {
@@ -98,6 +100,7 @@ function Offers() {
       let listings = [];
 
       // Loop through the querySnap
+      // eslint-disable-next-line no-unused-vars
       const result = querySnap.forEach((doc) => {
         // console.log(doc.data());
         // Add to listings array

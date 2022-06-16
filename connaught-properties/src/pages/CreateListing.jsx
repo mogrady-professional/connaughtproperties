@@ -56,6 +56,7 @@ function CreateListing() {
   // Initialize auth & Navigate
   const auth = getAuth();
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const isMounted = useRef(true);
 
   useEffect(() => {
@@ -151,6 +152,8 @@ function CreateListing() {
               case "running":
                 console.log("Upload is running");
                 break;
+              default:
+                break;
             }
           },
           (error) => {
@@ -199,7 +202,7 @@ function CreateListing() {
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
     // Save to database
     const docRef = await addDoc(collection(db, "listings"), formDataCopy);
-    toast.success("Listing created successfully");
+    toast.success("Listing Created Successfully");
     // Navigate to new listing
     navigate(`/category/${formDataCopy.type}/${docRef.id}`);
     setLoading(false);
