@@ -81,7 +81,12 @@ function CreateListing() {
       setLoading(false);
       document.getElementById("discountedPrice").style.border = "1px solid red";
       toast.error("Discounted price must be less than regular price");
+      console.log(regularPrice - discountedPrice);
+      console.log(discountedPrice >= regularPrice);
       return;
+    } else {
+      console.log(regularPrice - discountedPrice);
+      console.log(discountedPrice >= regularPrice);
     }
 
     // Prevent uploading 6 or more images
