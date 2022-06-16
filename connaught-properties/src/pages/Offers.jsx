@@ -20,12 +20,14 @@ function Offers() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
   // eslint-disable-next-line no-unused-vars
+  const [lastFetchedListing, setLastFetchedListing] = useState(null);
 
   useEffect(() => {
     const fetchListings = async () => {
       // eslint-disable-next-line no-unused-vars
       const listings = collection(db, "listings");
 
+      // Load 10 listings
       try {
         // Get reference
         // eslint-disable-next-line no-unused-vars
@@ -44,6 +46,10 @@ function Offers() {
 
         // Assign empty array to listings to push to
         let listings = [];
+
+        // Control on listings array length to retrieve
+        const lastVisible = querySnap.docs[querySnap.docs.length - 1]; // Get last doc
+        setLastFetchedListing(lastVisible); // Set last doc
 
         // Loop through the querySnap
         const result = querySnap.forEach((doc) => {
@@ -65,6 +71,50 @@ function Offers() {
     fetchListings();
   }, []);
 
+  // Pagination / Load more listings
+  const onFetchMoreListings = async () => {
+    const listings = collection(db, "listings");
+
+    try {
+      const listingsRef = collection(db, "listings");
+
+      // this time use startAfter to get the next 10 listings
+      const q = query(
+        listingsRef,
+        where("offer", "==", true),
+        orderBy("timestamp", "desc"),
+        startAfter(lastFetchedListing),
+        limit(10)
+      );
+
+      // Execute the query
+      const querySnap = await getDocs(q);
+
+      // Control on listings array length to retrieve
+      const lastVisible = querySnap.docs[querySnap.docs.length - 1]; // Get last doc
+      setLastFetchedListing(lastVisible); // Set last doc
+
+      // Assign empty array to listings to push to
+      let listings = [];
+
+      // Loop through the querySnap
+      const result = querySnap.forEach((doc) => {
+        // console.log(doc.data());
+        // Add to listings array
+        return listings.push({
+          id: doc.id,
+          data: doc.data(),
+        });
+      });
+      // First 10 listings are already in the state, so we just append the next 10
+      setListings((prevState) => [...prevState, ...listings]);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      toast.error("Could not fetch listings");
+    }
+  };
+
   return (
     <div className="category">
       <header>
@@ -85,6 +135,13 @@ function Offers() {
               ))}
             </ul>
           </main>
+          <br />
+          <br />
+          {lastFetchedListing && (
+            <p className="loadMore" onClick={onFetchMoreListings}>
+              Load More
+            </p>
+          )}
         </>
       ) : (
         <p>There are no current offers</p>
