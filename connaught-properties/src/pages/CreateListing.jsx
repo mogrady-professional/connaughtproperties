@@ -270,8 +270,15 @@ function CreateListing() {
             </button>
           </div>
 
-          <label className="formLabel">Name</label>
-          <textarea
+          <label className="formLabel">
+            Name
+            <br></br>
+            <i className="catchyTitle">
+              {"(Catchy Title for your Advertisement)"}
+            </i>
+          </label>
+
+          <input
             className="formInputName text-center"
             type="text"
             id="name"
@@ -280,6 +287,7 @@ function CreateListing() {
             maxLength="50"
             minLength="10"
             required
+            rows="1"
           />
           <div className="formRooms flex">
             <div>
@@ -360,14 +368,15 @@ function CreateListing() {
             </button>
           </div>
 
-          <label className="formLabel">Eircode/Full Address</label>
+          <label className="formLabel">Full Address {"&"} Eircode</label>
           <textarea
-            className="formInputAddress"
+            className="formInputAddress text-center"
             type="text"
             id="address"
             value={address}
             onChange={onMutate}
             required
+            rows="1"
           />
 
           {!geolocationEnabled && (
@@ -439,16 +448,18 @@ function CreateListing() {
           {offer && (
             <>
               <label className="formLabel">Discounted Price</label>
-              <input
-                className="formInputSmall"
-                type="number"
-                id="discountedPrice"
-                value={discountedPrice}
-                onChange={onMutate}
-                min="50"
-                max="750000000"
-                required={offer}
-              />
+              <div className="formPriceDiv">
+                <input
+                  className="formInputSmall"
+                  type="number"
+                  id="discountedPrice"
+                  value={discountedPrice}
+                  onChange={onMutate}
+                  min="50"
+                  max="750000000"
+                  required={offer}
+                />
+              </div>
             </>
           )}
 

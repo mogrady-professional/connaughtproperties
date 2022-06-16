@@ -322,7 +322,7 @@ button {
 }
 
 .exploreCategoryHeading {
-    margin-top: 3rem;
+    /* margin-top: 3rem; */
 }
 
 .swiper-container {
@@ -851,7 +851,7 @@ button {
 
 .swiper-button-prev,
 .swiper-button-next {
-    color: #ffff;
+    color: #fff;
 }
 
 
@@ -860,6 +860,15 @@ button {
 @media only screen and (max-width: 600px) {
     .removeIcon {
         margin-right: 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .swiper {
+        /* background-color: red !important; */
+        /* max-height: 300px; */
+        max-height: 32vh;
+        /* max-height: fit-content; */
     }
 }
 
@@ -874,4 +883,10 @@ button {
 .formRooms {
     align-items: center;
     justify-content: center;
+}
+
+.catchyTitle {
+    font-size: 0.9rem;
+    opacity: 0.75;
+    text-align: center;
 }

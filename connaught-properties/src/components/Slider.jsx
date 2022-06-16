@@ -10,12 +10,21 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/a11y";
 import Spinner from "../components/Spinner";
+import { useLocation } from "react-router-dom";
 
 function Slider() {
   const [loading, setLoading] = useState(true);
   const [listings, setListings] = useState(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const pathMatchRoute = (route) => {
+    if (route == location.pathname) {
+      console.log(route);
+      return true;
+    }
+  };
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -32,7 +41,7 @@ function Slider() {
           data: doc.data(),
         });
       });
-      console.log(listings);
+      //   console.log(listings);
       setListings(listings);
       setLoading(false);
     };
@@ -53,11 +62,13 @@ function Slider() {
           navigation={true}
           a11y={true}
           pagination={{ clickable: true }}
+          style={{ height: "50vh" }}
         >
           {listings.map(({ data, id }) => (
             <SwiperSlide
               key={id}
               onClick={() => navigate(`/category/${data.type}/${id}`)}
+              className="swiperSlideDiv"
             >
               <img
                 style={{
@@ -70,7 +81,7 @@ function Slider() {
               />
               <p className="swiperSlideText">{data.name}</p>
               <p className="swiperSlidePrice">
-                ${data.discountedPrice ?? data.regularPrice}{" "}
+                €{data.discountedPrice ?? data.regularPrice}{" "}
                 {data.type === "rent" && "/ month"}
               </p>
             </SwiperSlide>

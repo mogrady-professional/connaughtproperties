@@ -32,7 +32,7 @@ function Listing() {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log(docSnap.data());
+        // console.log(docSnap.data());
         setListing(docSnap.data());
         setLoading(false);
       }
@@ -51,7 +51,7 @@ function Listing() {
         slidesPerView={1}
         pagination={{ clickable: true }}
         navigation
-        style={{ height: "50vh" }}
+        style={{ height: "100vh" }}
       >
         {listing.imgUrls.map((url, index) => {
           return (
@@ -100,7 +100,7 @@ function Listing() {
         </p>
         {listing.offer && (
           <p className="discountPrice">
-            ${listing.regularPrice - listing.discountedPrice} discount
+            €{listing.regularPrice - listing.discountedPrice} discount
           </p>
         )}
 
