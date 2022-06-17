@@ -191,3 +191,6 @@ service firebase.storage {
 <img src="images/sign-in-mobile.png"  height="100%" width="50%">
   </tr>
 </table>
+<p align="center">
+<img src="images/vercel_deployment_forwarding.png"  height="auto" width="100%"> 
+</p>
