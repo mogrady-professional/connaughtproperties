@@ -83,8 +83,8 @@
 # Production Vercel Deployment Notes
 
 - Connect project to GitHub repo
-- Provide ENV Variable(s)
-- Google OAuth — Published Domain URL must be added to OAuth Redirect domains in firebase console/authentication/sign in method/ Authorized domains
+- Provide `REACT_APP_GEOCODE_API_KEY` ENV Variable to Vercel
+- Google OAuth — Published Domain URL(s) must be added to OAuth Redirect domains in firebase console/authentication/sign in method/ Authorized domains
 - Geocoding API — Add Application Restrictions (Restrict key usage requests to the specified website)
 - `A Runtime Error Occurred e is not a function` error will occur on Vercel dashboard if there is a mismatch with `Credentials` / `API Keys` section of API's and Services in GCP relating to the Geolocation and OAuth Functionality as well as a failed login and possible dns issue on initial settings update for 5 minutes.
 
