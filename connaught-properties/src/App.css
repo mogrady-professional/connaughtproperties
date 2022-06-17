@@ -349,11 +349,11 @@ button {
 .swiperSlideText {
     color: #ffffff;
     position: absolute;
-    top: 70px;
-    left: 0;
+    bottom: 35px;
+    left: 10px;
     font-weight: 600;
     max-width: 90%;
-    font-size: 1.25rem;
+    font-size: 1rem;
     background-color: rgba(0, 0, 0, 0.8);
     padding: 0.5rem;
 }
